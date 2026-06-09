@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Đặt lịch khám — TechCare</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/patient/layout.css" />
+  <link rel="stylesheet" href="/css/patient/component.css" />
+  <link rel="stylesheet" href="/css/patient/pages.css" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+</head>
+<body class="app-body" data-page="booking">
+  <div id="navMount"></div>
+  <div class="main-wrap">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button type="button" class="menu-btn" id="sidebarToggle"><i data-lucide="menu"></i></button>
+        <h1 id="pageTitle">Đặt lịch khám</h1>
+      </div>
+    </header>
+    <main class="page-content booking-wizard">
+      <div id="profileGateAlert" class="alert alert-warning" style="display:none;margin-bottom:16px">
+        <i data-lucide="alert-triangle"></i>
+        <span id="profileGateText"></span>
+        <a href="/pages/patient/profile.html" class="btn btn-primary btn-sm" style="margin-left:12px">Cập nhật hồ sơ</a>
+      </div>
+      <div class="wizard-steps" id="wizardSteps">
+        <div class="wizard-step active" data-step="1"><span class="wizard-step-num">1</span><span class="wizard-step-label">Chuyên khoa</span></div>
+        <div class="wizard-step" data-step="2"><span class="wizard-step-num">2</span><span class="wizard-step-label">Bác sĩ</span></div>
+        <div class="wizard-step" data-step="3"><span class="wizard-step-num">3</span><span class="wizard-step-label">Dịch vụ &amp; giờ</span></div>
+        <div class="wizard-step" data-step="4"><span class="wizard-step-num">4</span><span class="wizard-step-label">Xác nhận</span></div>
+      </div>
+
+      <div class="card">
+        <div class="wizard-panel active" id="step1">
+          <div class="card-header"><div><h2>Chọn chuyên khoa</h2><p>Chọn khoa phù hợp với nhu cầu khám</p></div></div>
+          <div class="card-body"><div class="select-grid" id="deptGrid"><div class="skeleton" style="height:100px"></div></div></div>
+          <div class="card-footer"><button type="button" class="btn btn-primary" id="toStep2" disabled>Tiếp tục <i data-lucide="arrow-right"></i></button></div>
+        </div>
+
+        <div class="wizard-panel" id="step2">
+          <div class="card-header"><div><h2>Chọn bác sĩ</h2><p id="selectedDeptLabel">—</p></div></div>
+          <div class="card-body"><div class="select-grid" id="doctorGrid"></div></div>
+          <div class="card-footer">
+            <button type="button" class="btn btn-ghost" data-back="1"><i data-lucide="arrow-left"></i> Quay lại</button>
+            <button type="button" class="btn btn-primary" id="toStep3" disabled>Tiếp tục</button>
+          </div>
+        </div>
+
+        <div class="wizard-panel" id="step3">
+          <div class="card-header"><div><h2>Dịch vụ &amp; thời gian</h2><p id="selectedDoctorLabel">—</p></div></div>
+          <div class="card-body">
+            <div class="form-group">
+              <label class="form-label">Loại dịch vụ</label>
+              <select id="serviceType" class="form-select"></select>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Ngày khám</label>
+                <input type="date" id="apptDate" class="form-input" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Lý do khám (tuỳ chọn)</label>
+                <input type="text" id="apptReason" class="form-input" placeholder="Triệu chứng, mục đích khám..." maxlength="255" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Khung giờ</label>
+              <div class="slot-grid" id="slotGrid"><p class="form-hint">Chọn ngày để xem khung giờ trống</p></div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <button type="button" class="btn btn-ghost" data-back="2"><i data-lucide="arrow-left"></i> Quay lại</button>
+            <button type="button" class="btn btn-primary" id="toStep4" disabled>Tiếp tục</button>
+          </div>
+        </div>
+
+        <div class="wizard-panel" id="step4">
+          <div class="card-header"><div><h2>Xác nhận đặt lịch</h2><p>Kiểm tra thông tin trước khi gửi</p></div></div>
+          <div class="card-body">
+            <div class="booking-summary" id="bookingSummary"></div>
+          </div>
+          <div class="card-footer">
+            <button type="button" class="btn btn-ghost" data-back="3"><i data-lucide="arrow-left"></i> Quay lại</button>
+            <button type="button" class="btn btn-primary btn-lg" id="submitBooking"><span class="btn-label">Xác nhận đặt lịch</span><span class="btn-spinner"></span></button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div class="modal-overlay" id="bookingSlipModal">
+    <div class="modal" style="width:min(920px,100%);max-height:92vh;overflow:auto">
+      <div class="modal-header no-print">
+        <h3>Phiếu hướng dẫn khám</h3>
+        <button type="button" class="modal-close" id="btnCloseBookingSlip"><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="no-print" style="margin-bottom:10px">
+          <button type="button" class="btn btn-outline btn-sm" id="btnPrintBookingSlip"><i data-lucide="printer"></i> In phiếu</button>
+        </div>
+        <div id="bookingSlipPrint"></div>
+      </div>
+      <div class="modal-footer no-print">
+        <button type="button" class="btn btn-primary" id="btnBookingSlipDone">Xong</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/patient/common.js"></script>
+  <script src="/js/patient/navigation.js"></script>
+  <script src="/js/patient/booking.js"></script>
+</body>
+</html>

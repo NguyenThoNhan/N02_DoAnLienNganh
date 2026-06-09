@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tổng quan — Bác sĩ TechCare</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/doctor/layout.css" />
+  <link rel="stylesheet" href="/css/doctor/component.css" />
+  <link rel="stylesheet" href="/css/doctor/pages.css" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+</head>
+<body class="app-body" data-page="dashboard">
+  <div id="navMount"></div>
+  <div class="main-wrap">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button type="button" class="menu-btn" id="sidebarToggle"><i data-lucide="menu"></i></button>
+        <h1 id="pageTitle">Tổng quan</h1>
+      </div>
+      <div class="topbar-actions">
+        <div class="topbar-search">
+          <i data-lucide="search"></i>
+          <input type="search" id="quickSearch" placeholder="Tìm bệnh nhân trong hàng chờ..." />
+        </div>
+        <p class="topbar-greeting">BS. <strong id="topUserName">—</strong></p>
+      </div>
+    </header>
+    <main class="page-content">
+      <section class="doctor-hero">
+        <div>
+          <h2 id="heroGreeting">Chào bác sĩ!</h2>
+          <p id="heroSub">Hàng chờ khám hôm nay</p>
+        </div>
+        <span class="badge badge-success" style="background:rgba(255,255,255,.2);color:#fff;border:none" id="todayDate">—</span>
+      </section>
+
+      <div class="stat-pills" id="statPills">
+        <div class="stat-pill skeleton" style="height:72px;width:180px"></div>
+        <div class="stat-pill skeleton" style="height:72px;width:160px"></div>
+        <div class="stat-pill skeleton" style="height:72px;width:170px"></div>
+      </div>
+
+      <div class="dashboard-split">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h2>Hàng chờ hôm nay</h2>
+              <p>Bệnh nhân chờ tiếp nhận &amp; đang khám</p>
+            </div>
+            <input type="date" id="queueDate" class="form-input" style="width:auto" />
+          </div>
+          <div class="queue-filter-row" id="queueFilterRow">
+            <button type="button" class="btn btn-ghost btn-sm active" data-queue-filter="all">Tất cả</button>
+            <button type="button" class="btn btn-ghost btn-sm" data-queue-filter="pending">Chờ xác nhận</button>
+            <button type="button" class="btn btn-ghost btn-sm" data-queue-filter="confirmed">Đã xác nhận</button>
+            <button type="button" class="btn btn-ghost btn-sm" data-queue-filter="in_progress">Đang khám</button>
+          </div>
+          <div class="card-body" id="queueList">
+            <div class="skeleton" style="height:80px;margin-bottom:10px"></div>
+            <div class="skeleton" style="height:80px"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h2>Lịch theo ngày</h2>
+              <p>Tất cả ca khám đã xếp lịch</p>
+            </div>
+          </div>
+          <div class="card-body" style="padding-top:0">
+            <div class="table-wrap">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Giờ</th>
+                    <th>Bệnh nhân</th>
+                    <th>Trạng thái</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="scheduleBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script src="/js/doctor/common.js"></script>
+  <script src="/js/doctor/navigation.js"></script>
+  <script src="/js/doctor/dashboard.js"></script>
+</body>
+</html>

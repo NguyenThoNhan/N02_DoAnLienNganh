@@ -1,0 +1,54 @@
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+<aside class="sidebar sidebar-doctor" id="sidebar">
+  <a href="/" class="sidebar-brand">
+    <span class="sidebar-brand-icon"><i data-lucide="stethoscope"></i></span>
+    <span class="brand-text">TechCare <small>Bác sĩ</small></span>
+  </a>
+
+  <nav class="sidebar-nav" id="sidebarNav">
+    <p class="nav-group-label">Chính</p>
+    <a href="/pages/doctor/dashboard.html" class="nav-item" data-nav="dashboard">
+      <span class="nav-icon"><i data-lucide="layout-dashboard"></i></span>
+      <span class="nav-label">Tổng quan</span>
+    </a>
+    <a href="/pages/doctor/patient-list.html" class="nav-item" data-nav="patients">
+      <span class="nav-icon"><i data-lucide="users"></i></span>
+      <span class="nav-label">Danh sách bệnh nhân</span>
+    </a>
+
+    <p class="nav-group-label">Khám bệnh</p>
+    <a href="/pages/doctor/examination.html" class="nav-item" data-nav="examination">
+      <span class="nav-icon"><i data-lucide="clipboard-list"></i></span>
+      <span class="nav-label">Phòng khám</span>
+    </a>
+
+    <p class="nav-group-label">Tài khoản</p>
+    <a href="/pages/doctor/profile.html" class="nav-item" data-nav="profile">
+      <span class="nav-icon"><i data-lucide="user-circle"></i></span>
+      <span class="nav-label">Hồ sơ của tôi</span>
+    </a>
+
+    <p class="nav-group-label">Hệ thống</p>
+    <a href="/pages/patient/hospital-map.html" class="nav-item" data-nav="hospital_map" target="_blank" rel="noopener">
+      <span class="nav-icon"><i data-lucide="map"></i></span>
+      <span class="nav-label">Sơ đồ ảo bệnh viện</span>
+    </a>
+    <a href="/" class="nav-item" data-nav="home">
+      <span class="nav-icon"><i data-lucide="home"></i></span>
+      <span class="nav-label">Trang chủ</span>
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="sidebar-user-card">
+      <div class="sidebar-user-avatar" id="sidebarUserAvatar">BS</div>
+      <div class="sidebar-user-info">
+        <strong id="sidebarUserName">Bác sĩ</strong>
+        <span id="sidebarUserMeta">—</span>
+      </div>
+      <button type="button" class="sidebar-logout" id="logoutBtn" title="Đăng xuất">
+        <i data-lucide="log-out"></i>
+      </button>
+    </div>
+  </div>
+</aside>

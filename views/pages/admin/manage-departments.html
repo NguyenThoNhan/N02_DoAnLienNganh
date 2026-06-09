@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Khoa / Phòng — Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/admin/layout.css" />
+  <link rel="stylesheet" href="/css/admin/component.css" />
+  <link rel="stylesheet" href="/css/admin/pages.css" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+</head>
+<body class="app-body" data-page="departments">
+  <div id="navMount"></div>
+  <div class="main-wrap">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button type="button" class="menu-btn" id="sidebarToggle"><i data-lucide="menu"></i></button>
+        <h1 id="pageTitle">Quản lý khoa</h1>
+      </div>
+      <div class="topbar-actions"><p class="topbar-greeting"><strong id="topUserName">—</strong></p></div>
+    </header>
+    <main class="page-content">
+      <div class="toolbar">
+        <div class="toolbar-left">
+          <div class="topbar-search" style="max-width:280px">
+            <i data-lucide="search"></i>
+            <input type="search" id="searchInput" placeholder="Tìm tên hoặc mã khoa..." />
+          </div>
+        </div>
+        <button type="button" class="btn btn-primary" id="btnAdd"><i data-lucide="plus"></i> Thêm khoa</button>
+      </div>
+      <div class="card">
+        <div class="card-body" style="padding-top:0">
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr><th>Mã</th><th>Tên khoa</th><th>Mô tả</th><th>Trạng thái</th><th></th></tr>
+              </thead>
+              <tbody id="tableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div class="modal-overlay" id="deptModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modalTitle">Thêm khoa</h3>
+        <button type="button" class="modal-close" data-close-modal><i data-lucide="x"></i></button>
+      </div>
+      <form id="deptForm" class="modal-body">
+        <input type="hidden" id="deptId" />
+        <div class="form-group">
+          <label class="form-label">Tên khoa *</label>
+          <input type="text" id="deptName" class="form-input" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Mã khoa *</label>
+          <input type="text" id="deptCode" class="form-input" required maxlength="20" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Mô tả</label>
+          <textarea id="deptDesc" class="form-input form-textarea"></textarea>
+        </div>
+        <div class="form-group" id="statusGroup" hidden>
+          <label class="form-label">Trạng thái</label>
+          <select id="deptStatus" class="form-input">
+            <option value="active">Hoạt động</option>
+            <option value="inactive">Ngưng</option>
+          </select>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" data-close-modal>Hủy</button>
+          <button type="submit" class="btn btn-primary" id="deptSubmit">Lưu</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/admin/common.js"></script>
+  <script src="/js/admin/navigation.js"></script>
+  <script src="/js/admin/manage-departments.js"></script>
+</body>
+</html>

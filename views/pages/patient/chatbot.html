@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trợ lý AI — TechCare</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/patient/layout.css" />
+  <link rel="stylesheet" href="/css/patient/component.css" />
+  <link rel="stylesheet" href="/css/patient/pages.css" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+</head>
+<body class="app-body" data-page="chatbot">
+  <div id="navMount"></div>
+  <div class="main-wrap">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button type="button" class="menu-btn" id="sidebarToggle"><i data-lucide="menu"></i></button>
+        <h1 id="pageTitle">Trợ lý AI</h1>
+      </div>
+    </header>
+    <main class="page-content">
+      <div class="chat-layout">
+        <div class="chat-window">
+          <div class="chat-messages" id="chatMessages">
+            <div class="chat-msg bot">
+              Xin chào! Tôi là trợ lý hướng dẫn thủ tục TechCare — giúp bạn đặt lịch, thanh toán, xem hồ sơ khám và quy trình bệnh viện.
+              <br><br>⚠️ Tôi không chẩn đoán bệnh và không kê thuốc. Nếu chưa biết hỏi gì, hãy nhấn gợi ý bên dưới hoặc gõ «Bạn có thể giúp gì?».
+              <span class="time">Bây giờ</span>
+            </div>
+          </div>
+          <div class="chat-input-bar">
+            <input type="text" id="chatInput" placeholder="Nhập câu hỏi..." maxlength="500" autocomplete="off" />
+            <button type="button" class="btn btn-primary" id="sendBtn"><i data-lucide="send"></i></button>
+          </div>
+        </div>
+      </div>
+      <section class="ai-suggest-panel">
+        <div class="ai-suggest-head">
+          <h3><i data-lucide="lightbulb"></i> Gợi ý câu hỏi nhanh</h3>
+          <p>Nhấn câu hỏi mẫu nếu chưa biết hỏi gì. Chatbot chỉ hướng dẫn thủ tục — không chẩn đoán hay kê thuốc.</p>
+        </div>
+        <div id="quickPrompts" class="ai-suggest-grid"></div>
+      </section>
+    </main>
+  </div>
+  <script src="/js/patient/common.js"></script>
+  <script src="/js/patient/navigation.js"></script>
+  <script src="/js/patient/chatbot.js"></script>
+</body>
+</html>

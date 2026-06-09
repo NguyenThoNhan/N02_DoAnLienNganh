@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kho thuốc — Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/admin/layout.css" />
+  <link rel="stylesheet" href="/css/admin/component.css" />
+  <link rel="stylesheet" href="/css/admin/pages.css" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+</head>
+<body class="app-body" data-page="drugs">
+  <div id="navMount"></div>
+  <div class="main-wrap">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button type="button" class="menu-btn" id="sidebarToggle"><i data-lucide="menu"></i></button>
+        <h1 id="pageTitle">Kho thuốc</h1>
+      </div>
+      <div class="topbar-actions"><p class="topbar-greeting"><strong id="topUserName">—</strong></p></div>
+    </header>
+    <main class="page-content">
+      <div class="toolbar">
+        <div class="toolbar-left">
+          <input type="search" id="searchInput" class="form-input" placeholder="Tìm thuốc, mã..." style="max-width:220px" />
+        </div>
+        <button type="button" class="btn btn-primary" id="btnAdd"><i data-lucide="pill"></i> Thêm thuốc</button>
+      </div>
+      <div class="card">
+        <div class="card-body" style="padding-top:0">
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr><th>Mã</th><th>Tên</th><th>Đơn giá</th><th>Tồn</th><th>Đơn vị</th><th>Trạng thái</th><th></th></tr>
+              </thead>
+              <tbody id="tableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div class="modal-overlay" id="drugModal">
+    <div class="modal modal-lg">
+      <div class="modal-header">
+        <h3 id="modalTitle">Thêm thuốc</h3>
+        <button type="button" class="modal-close" data-close-modal><i data-lucide="x"></i></button>
+      </div>
+      <form id="drugForm" class="modal-body">
+        <input type="hidden" id="drugId" />
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label">Tên thuốc *</label>
+            <input type="text" id="drugName" class="form-input" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Mã thuốc *</label>
+            <input type="text" id="drugCode" class="form-input" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Đơn giá (đ) *</label>
+            <input type="number" id="unitPrice" class="form-input" min="0" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Tồn kho</label>
+            <input type="number" id="stock" class="form-input" min="0" value="0" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Đơn vị</label>
+            <input type="text" id="unit" class="form-input" placeholder="viên, chai..." />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Nhóm</label>
+            <input type="text" id="category" class="form-input" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Nhà sản xuất</label>
+            <input type="text" id="manufacturer" class="form-input" />
+          </div>
+          <div class="form-group" id="drugStatusGroup" hidden>
+            <label class="form-label">Trạng thái</label>
+            <select id="drugStatus" class="form-input">
+              <option value="active">Đang kinh doanh</option>
+              <option value="inactive">Ngưng</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Mô tả</label>
+          <textarea id="drugDesc" class="form-input form-textarea"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" data-close-modal>Hủy</button>
+          <button type="submit" class="btn btn-primary" id="drugSubmit">Lưu</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="stockModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Điều chỉnh tồn kho</h3>
+        <button type="button" class="modal-close" data-close-modal><i data-lucide="x"></i></button>
+      </div>
+      <form id="stockForm" class="modal-body">
+        <input type="hidden" id="stockDrugId" />
+        <p id="stockDrugName" class="text-muted"></p>
+        <div class="form-group">
+          <label class="form-label">Số lượng (+ nhập, − xuất)</label>
+          <input type="number" id="stockQty" class="form-input" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Ghi chú</label>
+          <input type="text" id="stockNote" class="form-input" />
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" data-close-modal>Hủy</button>
+          <button type="submit" class="btn btn-primary">Cập nhật</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/admin/common.js"></script>
+  <script src="/js/admin/navigation.js"></script>
+  <script src="/js/admin/manage-drugs.js"></script>
+</body>
+</html>

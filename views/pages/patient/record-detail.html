@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chi tiết hồ sơ — TechCare</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/patient/layout.css" />
+  <link rel="stylesheet" href="/css/patient/component.css" />
+  <link rel="stylesheet" href="/css/patient/pages.css" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+</head>
+<body class="app-body" data-page="record">
+  <div id="navMount"></div>
+  <div class="main-wrap">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button type="button" class="menu-btn" id="sidebarToggle"><i data-lucide="menu"></i></button>
+        <h1 id="pageTitle">Chi tiết hồ sơ khám</h1>
+      </div>
+      <a href="/pages/patient/medical-history.html" class="btn btn-ghost btn-sm"><i data-lucide="arrow-left"></i> Quay lại</a>
+    </header>
+    <main class="page-content" id="recordContent">
+      <div class="skeleton" style="height:200px;margin-bottom:20px"></div>
+      <div class="skeleton" style="height:300px"></div>
+    </main>
+  </div>
+
+  <div class="modal-overlay" id="paymentModal">
+    <div class="modal" style="width:min(560px,100%)">
+      <div class="modal-header">
+        <h3>Thanh toán viện phí</h3>
+        <button type="button" class="modal-close" data-close-modal><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal-body" id="paymentModalBody"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-ghost" data-close-modal>Đóng</button>
+        <button type="button" class="btn btn-primary" id="confirmPayBtn"><span class="btn-label">Xác nhận đã thanh toán</span><span class="btn-spinner"></span></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay lab-report-overlay" id="labReportModal">
+    <div class="modal lab-report-modal-dialog">
+      <div class="modal-header no-print">
+        <h3>Phiếu kết quả xét nghiệm</h3>
+        <button type="button" class="modal-close" id="btnCloseLabReport" aria-label="Đóng"><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal-body" id="labReportPrint"></div>
+      <div class="modal-footer no-print">
+        <button type="button" class="btn btn-outline btn-sm" id="btnPrintLabReport"><i data-lucide="printer"></i> In phiếu</button>
+        <button type="button" class="btn btn-primary btn-sm" id="btnCloseLabReportFooter">Đóng</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/patient/common.js"></script>
+  <script src="/js/patient/navigation.js"></script>
+  <script src="/js/patient/record-detail.js"></script>
+</body>
+</html>

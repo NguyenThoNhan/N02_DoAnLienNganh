@@ -1,0 +1,30 @@
+@import url('/css/patient/pages.css');
+
+.admin-hero {
+  background: linear-gradient(135deg, #5b21b6 0%, #2563eb 50%, #0ea5e9 100%);
+  border-radius: var(--radius-lg);
+  padding: 28px 32px;
+  color: #fff;
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  animation: fadeUp 0.5s ease both;
+}
+
+.admin-hero h2 { font-size: 1.35rem; }
+.admin-hero p { opacity: 0.9; font-size: 0.9rem; }
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 20px;
+}
+
+.dashboard-grid .span-2 { grid-column: 1 / -1; }
+
+@media (max-width: 1100px) {
+  .dashboard-grid { grid-template-columns: 1fr; }
+}

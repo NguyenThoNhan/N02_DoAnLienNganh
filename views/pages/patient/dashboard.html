@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tổng quan — TechCare</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/patient/layout.css" />
+  <link rel="stylesheet" href="/css/patient/component.css" />
+  <link rel="stylesheet" href="/css/patient/pages.css" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+</head>
+<body class="app-body" data-page="dashboard">
+  <div id="navMount"></div>
+  <div class="main-wrap">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button type="button" class="menu-btn" id="sidebarToggle"><i data-lucide="menu"></i></button>
+        <h1 id="pageTitle">Tổng quan</h1>
+      </div>
+      <div class="topbar-actions">
+        <p class="topbar-greeting">Xin chào, <strong id="topUserName">—</strong></p>
+        <a href="/pages/patient/booking.html" class="btn btn-primary btn-sm"><i data-lucide="calendar-plus"></i> Đặt lịch</a>
+      </div>
+    </header>
+
+    <main class="page-content">
+      <section class="welcome-banner">
+        <div>
+          <h2 id="welcomeTitle">Chào bạn!</h2>
+          <p id="welcomeMeta">Theo dõi lịch khám và hồ sơ sức khỏe của bạn tại một nơi.</p>
+        </div>
+        <a href="/pages/patient/booking.html" class="btn btn-primary btn-lg"><i data-lucide="plus"></i> Đặt lịch mới</a>
+      </section>
+
+      <section class="news-showcase">
+        <div class="news-showcase-head">
+          <div>
+            <h2><i data-lucide="newspaper"></i> Tin tức &amp; sức khỏe</h2>
+            <p>Cập nhật mới nhất từ Bệnh viện TechCare</p>
+          </div>
+          <a href="/#news" class="btn btn-ghost btn-sm">Xem tất cả</a>
+        </div>
+        <div class="news-showcase-grid" id="newsGrid">
+          <div class="skeleton" style="height:140px;border-radius:16px"></div>
+          <div class="skeleton" style="height:140px;border-radius:16px"></div>
+          <div class="skeleton" style="height:140px;border-radius:16px"></div>
+        </div>
+      </section>
+
+      <div class="inline-metrics" id="inlineMetrics">
+        <div class="metric-chip skeleton" style="width:160px;height:44px;border-radius:999px"></div>
+        <div class="metric-chip skeleton" style="width:140px;height:44px;border-radius:999px"></div>
+        <div class="metric-chip skeleton" style="width:150px;height:44px;border-radius:999px"></div>
+      </div>
+
+      <section class="care-alerts" id="careAlerts">
+        <div class="skeleton" style="height:56px"></div>
+      </section>
+
+      <div class="dashboard-grid">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h2>Lịch khám sắp tới</h2>
+              <p>Ca khám gần nhất của bạn</p>
+            </div>
+            <a href="/pages/patient/booking.html" class="btn btn-ghost btn-sm">Xem tất cả</a>
+          </div>
+          <div class="card-body" id="upcomingAppt">
+            <div class="skeleton" style="height:120px"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h2>Truy cập nhanh</h2>
+              <p>Thao tác thường dùng</p>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="quick-actions">
+              <a href="/pages/patient/booking.html" class="quick-action">
+                <span class="icon-box blue"><i data-lucide="calendar-plus"></i></span>
+                <span>Đặt lịch khám</span>
+              </a>
+              <a href="/pages/patient/medical-history.html" class="quick-action">
+                <span class="icon-box green"><i data-lucide="file-text"></i></span>
+                <span>Hồ sơ khám</span>
+              </a>
+              <a href="/pages/patient/profile.html" class="quick-action">
+                <span class="icon-box violet"><i data-lucide="user"></i></span>
+                <span>Cập nhật hồ sơ</span>
+              </a>
+              <a href="/pages/patient/chatbot.html" class="quick-action">
+                <span class="icon-box amber"><i data-lucide="bot"></i></span>
+                <span>Trợ lý AI</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card full">
+          <div class="card-header">
+            <div>
+              <h2>Lịch hẹn gần đây</h2>
+              <p>Danh sách các cuộc hẹn của bạn</p>
+            </div>
+          </div>
+          <div class="card-body" style="padding-top:0">
+            <div class="table-wrap">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Bác sĩ</th>
+                    <th>Ngày giờ</th>
+                    <th>Trạng thái</th>
+                    <th>Phí khám</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="apptTableBody">
+                  <tr><td colspan="5"><div class="skeleton" style="height:48px"></div></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="card full">
+          <div class="card-header">
+            <div>
+              <h2>Lần khám gần đây</h2>
+              <p>Hồ sơ sức khỏe đã có kết quả</p>
+            </div>
+            <a href="/pages/patient/medical-history.html" class="btn btn-ghost btn-sm">Xem tất cả</a>
+          </div>
+          <div class="card-body" id="recentVisits">
+            <div class="skeleton" style="height:80px"></div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <div class="modal-overlay" id="cancelModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Hủy lịch hẹn</h3>
+        <button type="button" class="modal-close" data-close-modal><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal-body">
+        <p style="margin-bottom:14px;font-size:0.9rem;color:var(--text-secondary)">Bạn có chắc muốn hủy lịch hẹn này? Chỉ được hủy trước giờ khám ít nhất 2 tiếng.</p>
+        <div class="form-group">
+          <label class="form-label">Lý do hủy (tuỳ chọn)</label>
+          <textarea id="cancelReason" class="form-textarea" rows="3" placeholder="Nhập lý do..."></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-ghost" data-close-modal>Đóng</button>
+        <button type="button" class="btn btn-danger" id="confirmCancelBtn"><span class="btn-label">Xác nhận hủy</span><span class="btn-spinner"></span></button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/patient/common.js"></script>
+  <script src="/js/patient/navigation.js"></script>
+  <script src="/js/patient/dashboard.js"></script>
+</body>
+</html>

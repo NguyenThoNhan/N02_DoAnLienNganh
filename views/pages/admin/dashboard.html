@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — Admin TechCare</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/admin/layout.css" />
+  <link rel="stylesheet" href="/css/admin/component.css" />
+  <link rel="stylesheet" href="/css/admin/pages.css" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+</head>
+<body class="app-body" data-page="dashboard">
+  <div id="navMount"></div>
+  <div class="main-wrap">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button type="button" class="menu-btn" id="sidebarToggle"><i data-lucide="menu"></i></button>
+        <h1 id="pageTitle">Dashboard</h1>
+      </div>
+      <div class="topbar-actions">
+        <p class="topbar-greeting"><strong id="topUserName">—</strong></p>
+      </div>
+    </header>
+    <main class="page-content">
+      <section class="admin-hero">
+        <div>
+          <h2 id="heroTitle">Tổng quan hệ thống</h2>
+          <p id="heroSub">Theo dõi hoạt động bệnh viện theo thời gian thực</p>
+        </div>
+        <span class="badge" style="background:rgba(255,255,255,.2);color:#fff;border:none" id="todayLabel">—</span>
+      </section>
+
+      <div class="metric-grid" id="metricGrid">
+        <div class="metric-card skeleton" style="height:88px"></div>
+        <div class="metric-card skeleton" style="height:88px"></div>
+        <div class="metric-card skeleton" style="height:88px"></div>
+      </div>
+
+      <div class="dashboard-grid">
+        <div class="card span-2">
+          <div class="card-header">
+            <div>
+              <h2>Doanh thu</h2>
+              <p>Theo tháng (12 kỳ gần nhất)</p>
+            </div>
+            <select id="revenueGroup" class="form-input" style="width:auto">
+              <option value="month" selected>Theo tháng</option>
+              <option value="day">Theo ngày</option>
+            </select>
+          </div>
+          <div class="card-body">
+            <div class="chart-bars" id="revenueChart"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div><h2>Top bác sĩ</h2><p>Theo số ca hoàn thành</p></div>
+          </div>
+          <div class="card-body" id="topDoctorsList"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div><h2>Hiệu suất khoa</h2><p>Doanh thu theo khoa</p></div>
+          </div>
+          <div class="card-body" id="deptStats"></div>
+        </div>
+
+        <div class="card span-2">
+          <div class="card-header">
+            <div>
+              <h2>Lịch hẹn chờ xác nhận</h2>
+              <p>Quản lý và xác nhận đặt lịch</p>
+            </div>
+            <a href="/pages/admin/manage-patients.html" class="btn btn-outline btn-sm">Xem bệnh nhân</a>
+          </div>
+          <div class="card-body" style="padding-top:0">
+            <div class="table-wrap">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Ngày / Giờ</th>
+                    <th>Bệnh nhân</th>
+                    <th>Bác sĩ</th>
+                    <th>Khoa</th>
+                    <th>Trạng thái</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="pendingBookings"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script src="/js/admin/common.js"></script>
+  <script src="/js/admin/navigation.js"></script>
+  <script src="/js/admin/dashboard.js"></script>
+</body>
+</html>

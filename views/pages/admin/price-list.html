@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bảng giá — Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/admin/layout.css" />
+  <link rel="stylesheet" href="/css/admin/component.css" />
+  <link rel="stylesheet" href="/css/admin/pages.css" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+</head>
+<body class="app-body" data-page="prices">
+  <div id="navMount"></div>
+  <div class="main-wrap">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button type="button" class="menu-btn" id="sidebarToggle"><i data-lucide="menu"></i></button>
+        <h1 id="pageTitle">Bảng giá dịch vụ</h1>
+      </div>
+      <div class="topbar-actions"><p class="topbar-greeting"><strong id="topUserName">—</strong></p></div>
+    </header>
+    <main class="page-content">
+      <div class="toolbar">
+        <p class="text-muted">Giá dịch vụ đặt lịch (ngoài phí khám theo bác sĩ)</p>
+        <button type="button" class="btn btn-primary" id="btnAdd"><i data-lucide="plus"></i> Thêm dịch vụ</button>
+      </div>
+      <div class="card">
+        <div class="card-body" style="padding-top:0">
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr><th>Loại</th><th>Tên dịch vụ</th><th>Giá</th><th>Mô tả</th><th>Trạng thái</th><th></th></tr>
+              </thead>
+              <tbody id="tableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div class="modal-overlay" id="svcModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modalTitle">Thêm dịch vụ</h3>
+        <button type="button" class="modal-close" data-close-modal><i data-lucide="x"></i></button>
+      </div>
+      <form id="svcForm" class="modal-body">
+        <input type="hidden" id="svcId" />
+        <div class="form-group">
+          <label class="form-label">Loại dịch vụ *</label>
+          <select id="serviceType" class="form-input" required></select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Tên hiển thị *</label>
+          <input type="text" id="svcName" class="form-input" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Giá (đ) *</label>
+          <input type="number" id="svcPrice" class="form-input" min="0" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Mô tả</label>
+          <textarea id="svcDesc" class="form-input form-textarea"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" data-close-modal>Hủy</button>
+          <button type="submit" class="btn btn-primary" id="svcSubmit">Lưu</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/admin/common.js"></script>
+  <script src="/js/admin/navigation.js"></script>
+  <script src="/js/admin/price-list.js"></script>
+</body>
+</html>

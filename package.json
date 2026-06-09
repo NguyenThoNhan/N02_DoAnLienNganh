@@ -1,0 +1,30 @@
+{
+  "name": "hospital-management-system",
+  "version": "1.0.0",
+  "description": "Hospital Management System - RESTful API Backend",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "nodemon backend/server.js",
+    "migrate": "node backend/migrations/migrate.js up",
+    "migrate:down": "node backend/migrations/migrate.js down",
+    "seed": "node backend/migrations/seed.js",
+    "test:load": "node test/load/run-load-test.js",
+    "ai:train": "python backend/ai/train.py"
+
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^3.9.7",
+    "uuid": "^10.0.0"
+  },
+  "devDependencies": {
+    "autocannon": "^8.0.0",
+    "nodemon": "^3.1.4"
+  }
+}

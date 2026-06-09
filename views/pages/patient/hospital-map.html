@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sơ đồ bệnh viện 3D — TechCare</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/patient/layout.css" />
+  <link rel="stylesheet" href="/css/patient/component.css" />
+  <link rel="stylesheet" href="/css/patient/pages.css" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+</head>
+<body class="app-body" data-page="hospital_map">
+  <div id="navMount"></div>
+  <div class="main-wrap main-wrap--map">
+    <header class="topbar topbar--map">
+      <div class="topbar-left">
+        <button type="button" class="menu-btn" id="sidebarToggle"><i data-lucide="menu"></i></button>
+        <h1 id="pageTitle">Campus 3D TechCare</h1>
+      </div>
+      <div class="topbar-actions map-hud-hint">
+        <i data-lucide="mouse-pointer-2"></i>
+        <span>Trái: xoay · Phải: di chuyển · Cuộn: zoom</span>
+      </div>
+    </header>
+
+    <main class="page-content page-content--map">
+      <div class="map3d-layout">
+        <section class="map3d-stage card">
+          <div class="map3d-toolbar" id="mapControls">
+            <button type="button" class="map3d-tool" data-map-action="zoom-in" title="Phóng to"><i data-lucide="zoom-in"></i></button>
+            <button type="button" class="map3d-tool" data-map-action="zoom-out" title="Thu nhỏ"><i data-lucide="zoom-out"></i></button>
+            <button type="button" class="map3d-tool" data-map-action="reset" title="Về góc mặc định"><i data-lucide="compass"></i></button>
+            <span class="map3d-toolbar-divider"></span>
+            <button type="button" class="map3d-tool map3d-tool--accent" data-map-action="route-latest"><i data-lucide="route"></i> Lịch gần nhất</button>
+          </div>
+          <div class="map3d-viewport" id="map3dViewport">
+            <div class="map3d-loading" id="map3dLoading">
+              <div class="map3d-loading-spinner"></div>
+              <p>Đang tải campus 3D…</p>
+            </div>
+            <canvas id="map3dCanvas"></canvas>
+            <div class="map3d-popup" id="mapPopup" hidden></div>
+          </div>
+          <div class="map3d-legend">
+            <span><i class="leg leg-a"></i> Tòa A — Khám lâm sàng</span>
+            <span><i class="leg leg-b"></i> Tòa B — Cận lâm sàng</span>
+            <span><i class="leg leg-c"></i> Tòa C — Chuyên khoa</span>
+            <span><i class="leg leg-gate"></i> Cổng chính</span>
+          </div>
+        </section>
+
+        <aside class="map3d-sidebar card">
+          <div class="card-header map3d-sidebar-head">
+            <h2><i data-lucide="map-pin"></i> Điểm đến</h2>
+            <p>Chọn khoa/phòng — hệ thống vẽ lộ trình từ cổng.</p>
+          </div>
+          <div class="card-body map3d-sidebar-body">
+            <div class="map-route-panel" id="mapRoutePanel">
+              <div id="mapRouteDetail" class="map-route-detail">Chọn mục bên dưới hoặc bấm «Lịch gần nhất».</div>
+            </div>
+            <div class="map-dept-search">
+              <i data-lucide="search"></i>
+              <input type="search" id="deptSearch" class="form-input" placeholder="Tìm phòng, khoa…" autocomplete="off" />
+            </div>
+            <ul class="map-dept-list" id="deptList"></ul>
+          </div>
+        </aside>
+      </div>
+    </main>
+  </div>
+  <script src="/js/patient/common.js"></script>
+  <script src="/js/patient/navigation.js"></script>
+  <script type="module" src="/js/patient/hospital-map.js"></script>
+</body>
+</html>

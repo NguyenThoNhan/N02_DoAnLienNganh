@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="TechCare — Hệ thống quản lý bệnh viện đa khoa. Đặt lịch khám, sổ sức khỏe điện tử, tư vấn trực tuyến." />
+  <title>TechCare — Bệnh viện Đa khoa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/landing.css" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+</head>
+<body>
+
+<header class="site-header" id="header">
+  <div class="container header-inner">
+    <a href="/" class="brand">
+      <span class="brand-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M12 8v4M10 10h4"/></svg>
+      </span>
+      TechCare
+    </a>
+
+    <nav class="nav-desktop" aria-label="Chính">
+      <a href="#features">Tính năng</a>
+      <a href="#ai-lab">AI Lab</a>
+      <a href="#departments">Chuyên khoa</a>
+      <a href="#doctors">Bác sĩ</a>
+      <a href="#news">Tin tức</a>
+    </nav>
+
+    <div class="header-actions">
+      <a href="/pages/auth/login.html" class="btn btn-ghost">Đăng nhập</a>
+      <a href="/pages/auth/register.html" class="btn btn-primary">Đăng ký</a>
+    </div>
+
+    <button type="button" class="menu-toggle" id="menuToggle" aria-label="Mở menu" aria-expanded="false">
+      <i data-lucide="menu"></i>
+    </button>
+  </div>
+
+  <nav class="nav-mobile" id="navMobile" aria-label="Menu di động">
+    <a href="#features">Tính năng</a>
+    <a href="#ai-lab">AI Lab</a>
+    <a href="#departments">Chuyên khoa</a>
+    <a href="#doctors">Bác sĩ</a>
+    <a href="#news">Tin tức</a>
+    <div class="mobile-cta">
+      <a href="/pages/auth/login.html" class="btn btn-outline">Đăng nhập</a>
+      <a href="/pages/auth/register.html" class="btn btn-primary">Đăng ký ngay</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="hero" id="home">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="dot"></span>
+          Hệ thống y tế số — luôn sẵn sàng phục vụ
+        </div>
+        <h1>Chăm sóc sức khỏe <span>thông minh</span> &amp; toàn diện</h1>
+        <p class="hero-desc">
+          Đặt lịch khám trực tuyến, theo dõi hồ sơ bệnh án và nhận tư vấn từ đội ngũ bác sĩ hàng đầu — tất cả trên một nền tảng duy nhất.
+        </p>
+        <div class="hero-actions">
+          <a href="/pages/auth/register.html" class="btn btn-primary btn-lg">
+            <i data-lucide="calendar-plus"></i>
+            Đặt lịch khám
+          </a>
+          <a href="/pages/auth/login.html" class="btn btn-outline btn-lg">
+            <i data-lucide="log-in"></i>
+            Đăng nhập
+          </a>
+          <a href="/pages/patient/hospital-map.html" class="btn btn-ghost btn-lg hero-btn-map">
+            <i data-lucide="map"></i>
+            Sơ đồ BV 3D
+          </a>
+        </div>
+        <div class="trust-strip" id="trustStrip">
+          <span class="trust-pill"><i data-lucide="stethoscope"></i> <span id="trustDoctors">—</span> bác sĩ</span>
+          <span class="trust-pill"><i data-lucide="building-2"></i> <span id="trustDepts">—</span> chuyên khoa</span>
+          <span class="trust-pill"><i data-lucide="clock"></i> Đặt lịch 24/7</span>
+          <span class="trust-pill"><i data-lucide="shield-check"></i> Bảo mật dữ liệu</span>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="floating-badge top">
+          <i data-lucide="heart-pulse"></i>
+          <span>Theo dõi sức khỏe</span>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-header">
+            <h3>Lịch khám sắp tới</h3>
+            <span>Đang hoạt động</span>
+          </div>
+          <div class="appointment-preview" id="heroAppointments">
+            <div class="appt-item">
+              <div class="appt-avatar">BS</div>
+              <div class="appt-info">
+                <strong>Đang tải...</strong>
+                <span>Vui lòng đợi</span>
+              </div>
+              <span class="appt-status">—</span>
+            </div>
+          </div>
+        </div>
+        <div class="floating-badge bottom">
+          <i data-lucide="file-text"></i>
+          <span>Sổ sức khỏe điện tử</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats-band" aria-label="Thống kê">
+    <div class="container stats-grid">
+      <div class="stat-item">
+        <strong>10K+</strong>
+        <span>Bệnh nhân tin dùng</span>
+      </div>
+      <div class="stat-item">
+        <strong id="statDoctors">—</strong>
+        <span>Bác sĩ chuyên khoa</span>
+      </div>
+      <div class="stat-item">
+        <strong id="statDepts">—</strong>
+        <span>Chuyên khoa</span>
+      </div>
+      <div class="stat-item">
+        <strong>24/7</strong>
+        <span>Đặt lịch &amp; chatbot</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="features">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Tính năng</span>
+        <h2>Mọi thứ bạn cần cho hành trình chăm sóc sức khỏe</h2>
+        <p>Trải nghiệm y tế hiện đại, gọn gàng và dễ sử dụng — theo phong cách quản lý chuyên nghiệp.</p>
+      </div>
+      <div class="features-grid">
+        <article class="feature-card">
+          <div class="feature-icon blue"><i data-lucide="calendar-check"></i></div>
+          <h3>Đặt lịch thông minh</h3>
+          <p>Chọn bác sĩ, khung giờ và chống trùng lịch tự động — không cần xếp hàng tại quầy.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon cyan"><i data-lucide="clipboard-list"></i></div>
+          <h3>Sổ sức khỏe điện tử</h3>
+          <p>Lưu trữ chẩn đoán, đơn thuốc và lịch sử khám — truy cập mọi lúc, mọi nơi.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon green"><i data-lucide="flask-conical"></i></div>
+          <h3>Kết quả xét nghiệm</h3>
+          <p>Nhận kết quả XN trực tuyến ngay sau khi bác sĩ cập nhật trên hệ thống.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon violet"><i data-lucide="pill"></i></div>
+          <h3>Đơn thuốc số</h3>
+          <p>Xem chi tiết thuốc, liều dùng và hướng dẫn — minh bạch từng đơn kê.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon amber"><i data-lucide="credit-card"></i></div>
+          <h3>Thanh toán QR</h3>
+          <p>Thanh toán viện phí nhanh qua mã QR — minh bạch từng khoản phí khám.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon rose"><i data-lucide="bot"></i></div>
+          <h3>Trợ lý AI 24/7</h3>
+          <p>Chatbot hỗ trợ đặt lịch, tra cứu dịch vụ và giải đáp thắc mắc thường gặp.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon teal"><i data-lucide="map-pin"></i></div>
+          <h3>Campus 3D</h3>
+          <p>Sơ đồ bệnh viện ảo — xoay, zoom và gợi ý lộ trình từ cổng đến phòng khám.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon indigo"><i data-lucide="brain-circuit"></i></div>
+          <h3>AI Lab (Demo)</h3>
+          <p>Mô phỏng huấn luyện mô hình sinh kết quả XN — phục vụ nghiên cứu &amp; học tập.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="ai-lab" class="ai-lab-section">
+    <div class="container ai-lab-grid">
+      <div class="ai-lab-copy">
+        <span class="section-tag">Nghiên cứu ứng dụng</span>
+        <h2>AI Lab — Mô phỏng huấn luyện kết quả xét nghiệm</h2>
+        <p>
+          TechCare tích hợp module demo học tập: huấn luyện mô hình <strong>Random Forest</strong> trên
+          <strong>20 mẫu bệnh nhân</strong> giả lập, sau đó sinh dự đoán chỉ số xét nghiệm máu tổng quát.
+        </p>
+        <ul class="ai-lab-list">
+          <li><i data-lucide="check-circle"></i> Tách biệt hoàn toàn — không ghi CSDL hệ thống</li>
+          <li><i data-lucide="check-circle"></i> Hiển thị pipeline: load data → train → predict</li>
+          <li><i data-lucide="check-circle"></i> Phù hợp trình diễn đồ án &amp; báo cáo học thuật</li>
+        </ul>
+        <a href="/demo/lab-ai-training-demo.html" class="btn btn-primary btn-lg" target="_blank" rel="noopener">
+          <i data-lucide="flask-conical"></i>
+          Mở AI Lab Demo
+        </a>
+      </div>
+      <div class="ai-lab-visual">
+        <div class="ai-terminal">
+          <div class="ai-terminal-bar"><span></span><span></span><span></span></div>
+          <pre id="aiTerminalPreview">[TechCare AI Lab]
+&gt; load_dataset(n=20) ... OK
+&gt; model = RandomForestRegressor()
+&gt; Chờ huấn luyện trên trang demo...</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="campus" class="campus-section">
+    <div class="container campus-grid">
+      <div class="campus-visual">
+        <div class="campus-mock">
+          <div class="campus-block a">Tòa A</div>
+          <div class="campus-block b">Tòa B</div>
+          <div class="campus-block c">Tòa C</div>
+          <div class="campus-route"></div>
+        </div>
+      </div>
+      <div class="campus-copy">
+        <span class="section-tag">Định hướng thông minh</span>
+        <h2>Sơ đồ bệnh viện 3D tương tác</h2>
+        <p>
+          Bệnh nhân xem campus ảo TechCare, phóng to thu nhỏ bằng chuột và chọn khoa/phòng để xem
+          lộ trình từ cổng chính — hỗ trợ giảm thời gian tìm đường tại bệnh viện.
+        </p>
+        <a href="/pages/patient/hospital-map.html" class="btn btn-outline btn-lg">
+          <i data-lucide="navigation"></i>
+          Khám phá sơ đồ 3D
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="roles" class="roles-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Nền tảng đa vai trò</span>
+        <h2>Một hệ thống — ba không gian làm việc</h2>
+        <p>Phân quyền JWT rõ ràng cho bệnh nhân, bác sĩ và quản trị viên.</p>
+      </div>
+      <div class="roles-grid">
+        <article class="role-card">
+          <div class="role-icon patient"><i data-lucide="user-heart"></i></div>
+          <h3>Bệnh nhân</h3>
+          <p>Đặt lịch, phiếu hướng dẫn, lịch sử khám, thanh toán, chatbot.</p>
+          <a href="/pages/auth/register.html" class="role-link">Bắt đầu →</a>
+        </article>
+        <article class="role-card">
+          <div class="role-icon doctor"><i data-lucide="stethoscope"></i></div>
+          <h3>Bác sĩ</h3>
+          <p>Dashboard ca khám, phòng khám 6 bước, chỉ định &amp; kết quả XN.</p>
+          <a href="/pages/auth/login.html" class="role-link">Đăng nhập BS →</a>
+        </article>
+        <article class="role-card">
+          <div class="role-icon admin"><i data-lucide="settings"></i></div>
+          <h3>Quản trị</h3>
+          <p>Quản lý danh mục, người dùng, thuốc, dịch vụ và thống kê.</p>
+          <a href="/pages/auth/login.html" class="role-link">Cổng quản trị →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="departments">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Chuyên khoa</span>
+        <h2>Khám đa chuyên khoa</h2>
+        <p>Đội ngũ bác sĩ giàu kinh nghiệm tại các khoa chuyên sâu của bệnh viện.</p>
+      </div>
+      <div class="dept-scroll" id="deptList">
+        <div class="dept-skeleton"></div>
+        <div class="dept-skeleton"></div>
+        <div class="dept-skeleton"></div>
+        <div class="dept-skeleton"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how-it-works">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Quy trình</span>
+        <h2>Chỉ 3 bước để bắt đầu</h2>
+        <p>Đơn giản, nhanh chóng — phù hợp cho mọi bệnh nhân.</p>
+      </div>
+      <div class="steps-row">
+        <article class="step-card">
+          <div class="step-num">1</div>
+          <h3>Tạo tài khoản</h3>
+          <p>Đăng ký bằng số điện thoại trong vài phút — bảo mật và miễn phí.</p>
+        </article>
+        <article class="step-card">
+          <div class="step-num">2</div>
+          <h3>Đặt lịch khám</h3>
+          <p>Chọn khoa, bác sĩ và khung giờ phù hợp với lịch trình của bạn.</p>
+        </article>
+        <article class="step-card">
+          <div class="step-num">3</div>
+          <h3>Theo dõi &amp; thanh toán</h3>
+          <p>Xem kết quả khám, đơn thuốc và thanh toán viện phí trực tuyến.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="doctors">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Đội ngũ y bác sĩ</span>
+        <h2>Bác sĩ nổi bật</h2>
+        <p>Chuyên gia đầu ngành sẵn sàng đồng hành cùng sức khỏe của bạn.</p>
+      </div>
+      <div class="doctors-grid" id="doctorsGrid">
+        <p class="empty-state">Đang tải danh sách bác sĩ...</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="news">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Tin tức</span>
+        <h2>Thông tin &amp; sức khỏe</h2>
+        <p>Cập nhật tin tức, sự kiện và mẹo chăm sóc sức khỏe từ bệnh viện.</p>
+      </div>
+      <div class="news-grid" id="newsGrid">
+        <p class="empty-state">Đang tải tin tức...</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-box">
+        <h2>Sẵn sàng chăm sóc sức khỏe của bạn?</h2>
+        <p>Tham gia hàng nghìn bệnh nhân đã tin tưởng TechCare cho hành trình y tế thông minh hơn.</p>
+        <div class="cta-actions">
+          <a href="/pages/auth/register.html" class="btn btn-primary btn-lg">Tạo tài khoản miễn phí</a>
+          <a href="/pages/auth/login.html" class="btn btn-outline btn-lg">Tôi đã có tài khoản</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="brand">
+          <span class="brand-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </span>
+          TechCare
+        </a>
+        <p>Bệnh viện Đa khoa TechCare — Hệ thống quản lý y tế hiện đại, an toàn và thân thiện.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Dịch vụ</h4>
+        <ul>
+          <li><a href="/pages/auth/register.html">Đặt lịch khám</a></li>
+          <li><a href="#departments">Chuyên khoa</a></li>
+          <li><a href="#doctors">Danh sách bác sĩ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Hệ thống</h4>
+        <ul>
+          <li><a href="/pages/auth/login.html">Đăng nhập</a></li>
+          <li><a href="/pages/auth/register.html">Đăng ký</a></li>
+          <li><a href="#features">Tính năng</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Nghiên cứu</h4>
+        <ul>
+          <li><a href="/demo/lab-ai-training-demo.html" target="_blank" rel="noopener">AI Lab Demo</a></li>
+          <li><a href="/pages/patient/hospital-map.html">Sơ đồ BV 3D</a></li>
+          <li><a href="/pages/patient/chatbot.html">Trợ lý AI</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Liên hệ</h4>
+        <ul>
+          <li><a href="tel:19001234">1900 1234</a></li>
+          <li><a href="mailto:contact@techcare.vn">contact@techcare.vn</a></li>
+          <li>Ha Dong, TP. Hà Nội</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Bệnh viện Đa khoa TechCare. All rights reserved.</span>
+      <span>Đồ án quản lý bệnh viện</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/js/landing.js"></script>
+</body>
+</html>

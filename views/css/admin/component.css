@@ -1,0 +1,195 @@
+@import url('/css/patient/component.css');
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.toolbar-left, .toolbar-right { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+
+.data-table .actions { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+
+.chart-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  height: 200px;
+  padding: 16px 8px 0;
+}
+
+.chart-bar-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.chart-bar {
+  width: 100%;
+  max-width: 48px;
+  background: linear-gradient(180deg, #2563eb, #7c3aed);
+  border-radius: 8px 8px 4px 4px;
+  min-height: 4px;
+  transition: height 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  animation: growBar 0.8s ease both;
+}
+
+@keyframes growBar {
+  from { transform: scaleY(0); transform-origin: bottom; }
+  to { transform: scaleY(1); }
+}
+
+.chart-bar-wrap span {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.dept-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.dept-bar-row label { width: 120px; font-size: 0.8rem; font-weight: 500; flex-shrink: 0; }
+
+.dept-bar-track {
+  flex: 1;
+  height: 10px;
+  background: var(--bg);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.dept-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #2563eb, #0ea5e9);
+  border-radius: 999px;
+  transition: width 0.8s ease;
+}
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.metric-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s, box-shadow 0.2s;
+  animation: fadeUp 0.45s ease both;
+}
+
+.metric-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+
+.metric-card .m-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.metric-card .m-icon svg { width: 24px; height: 24px; }
+
+.metric-card .m-val {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.metric-card .m-lbl { font-size: 0.8rem; color: var(--text-muted); margin-top: 4px; }
+.metric-card .m-sub { font-size: 0.72rem; color: var(--text-secondary); margin-top: 6px; }
+
+.m-icon.violet { background: #ede9fe; color: #7c3aed; }
+.m-icon.blue { background: #dbeafe; color: #2563eb; }
+.m-icon.teal { background: #ccfbf1; color: #0d9488; }
+.m-icon.amber { background: #fef3c7; color: #d97706; }
+.m-icon.rose { background: #ffe4e6; color: #e11d48; }
+.m-icon.green { background: #dcfce7; color: #16a34a; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.form-textarea { min-height: 88px; resize: vertical; }
+
+.keywords-input { font-family: monospace; font-size: 0.85rem; }
+
+.thumb-preview {
+  width: 80px;
+  height: 56px;
+  border-radius: 8px;
+  object-fit: cover;
+  background: var(--bg);
+}
+
+.rank-list { list-style: none; margin: 0; padding: 0; }
+
+.rank-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  animation: fadeUp 0.4s ease both;
+}
+
+.rank-item:last-child { border-bottom: none; }
+
+.rank-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: var(--primary);
+}
+
+.rank-body { flex: 1; min-width: 0; }
+.rank-body strong { display: block; font-size: 0.9rem; }
+.rank-body span { font-size: 0.75rem; color: var(--text-muted); }
+
+.rank-meta { text-align: right; font-size: 0.8rem; font-weight: 600; }
+.rank-meta small { display: block; font-weight: 400; color: var(--text-muted); font-size: 0.72rem; }
+
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 640px) {
+  .form-grid-2 { grid-template-columns: 1fr; }
+}
+
+.modal-lg { max-width: 640px; }
+
+.text-muted { color: var(--text-muted); font-size: 0.875rem; }

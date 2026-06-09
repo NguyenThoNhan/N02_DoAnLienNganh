@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hồ sơ cá nhân — TechCare</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/patient/layout.css" />
+  <link rel="stylesheet" href="/css/patient/component.css" />
+  <link rel="stylesheet" href="/css/patient/pages.css" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+</head>
+<body class="app-body" data-page="profile">
+  <div id="navMount"></div>
+  <div class="main-wrap">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button type="button" class="menu-btn" id="sidebarToggle"><i data-lucide="menu"></i></button>
+        <h1 id="pageTitle">Hồ sơ cá nhân</h1>
+      </div>
+    </header>
+    <main class="page-content">
+      <div class="profile-grid">
+        <div class="card avatar-upload">
+          <div class="card-body">
+            <div class="avatar-preview" id="avatarPreview">?</div>
+            <label class="btn btn-outline btn-sm" style="cursor:pointer">
+              <i data-lucide="camera"></i> Đổi ảnh
+              <input type="file" id="avatarInput" accept="image/jpeg,image/png,image/webp" hidden />
+            </label>
+            <p class="form-hint" style="margin-top:12px">JPG, PNG, WEBP — tối đa 2MB</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><div><h2>Thông tin cá nhân</h2><p>Cập nhật để bác sĩ phục vụ tốt hơn</p></div></div>
+          <form id="profileForm" class="card-body">
+            <div class="profile-ids form-row" id="profileIds" style="display:none">
+              <div class="form-group">
+                <label class="form-label">Mã bệnh nhân (Mã NB)</label>
+                <input type="text" id="patient_code" class="form-input" disabled />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Đối tượng</label>
+                <input type="text" id="subject_label" class="form-input" value="Dịch vụ" disabled />
+              </div>
+            </div>
+            <div id="profileIncompleteAlert" class="alert alert-warning" style="display:none;margin-bottom:16px"></div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Họ và tên <span class="req">*</span></label>
+                <input type="text" id="full_name" class="form-input" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Số điện thoại</label>
+                <input type="tel" id="phone" class="form-input" disabled />
+                <p class="form-hint">Số điện thoại không thể thay đổi</p>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">CCCD/CMND <span class="req">*</span></label>
+                <input type="text" id="id_card" class="form-input" maxlength="12" placeholder="9 hoặc 12 số" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Ngày sinh <span class="req">*</span></label>
+                <input type="date" id="dob" class="form-input" required />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Giới tính <span class="req">*</span></label>
+                <select id="gender" class="form-select" required>
+                  <option value="">— Chọn —</option>
+                  <option value="male">Nam</option>
+                  <option value="female">Nữ</option>
+                  <option value="other">Khác</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Địa chỉ <span class="req">*</span></label>
+                <input type="text" id="address" class="form-input" placeholder="Số nhà, phường, quận, tỉnh..." required />
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary" id="saveBtn">
+              <span class="btn-label"><i data-lucide="save"></i> Lưu thay đổi</span>
+              <span class="btn-spinner"></span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script src="/js/patient/common.js"></script>
+  <script src="/js/patient/navigation.js"></script>
+  <script src="/js/patient/profile.js"></script>
+</body>
+</html>

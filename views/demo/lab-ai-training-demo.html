@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Demo huấn luyện AI — Kết quả XN (TechCare)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0f172a; --card: #1e293b; --border: #334155;
+      --text: #f1f5f9; --muted: #94a3b8;
+      --primary: #38bdf8; --ok: #4ade80; --warn: #fbbf24;
+    }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: linear-gradient(160deg, #0f172a 0%, #1e3a5f 50%, #0f172a 100%);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+    .wrap { width: min(960px, calc(100% - 32px)); margin: 0 auto; padding: 32px 0 48px; }
+    .banner {
+      background: linear-gradient(90deg, #b45309, #d97706);
+      color: #fff;
+      text-align: center;
+      padding: 10px 16px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+    header { margin-bottom: 28px; }
+    header h1 {
+      font-family: 'Sora', sans-serif;
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+    }
+    header p { color: var(--muted); font-size: 0.9rem; }
+    header a { color: var(--primary); }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+    }
+    .card h2 {
+      font-family: 'Sora', sans-serif;
+      font-size: 1rem;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .badge {
+      font-size: 0.7rem;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--primary);
+      font-weight: 600;
+    }
+    .meta { font-size: 0.8rem; color: var(--muted); margin-bottom: 12px; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
+    th, td { padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--border); }
+    th { color: var(--muted); font-weight: 600; }
+    .progress-wrap {
+      height: 10px;
+      background: #0f172a;
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 12px 0;
+    }
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #0ea5e9, #4ade80);
+      transition: width 0.3s ease;
+    }
+    .log {
+      background: #0f172a;
+      border-radius: 10px;
+      padding: 12px;
+      font-family: 'Consolas', monospace;
+      font-size: 0.72rem;
+      color: #86efac;
+      max-height: 200px;
+      overflow-y: auto;
+      margin-top: 12px;
+    }
+    .log .line { margin-bottom: 4px; }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .metric {
+      background: #0f172a;
+      border-radius: 10px;
+      padding: 12px;
+      text-align: center;
+    }
+    .metric strong { display: block; font-size: 1.1rem; color: var(--ok); }
+    .metric span { font-size: 0.72rem; color: var(--muted); }
+    .btn-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+    button {
+      font-family: 'Sora', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 10px 18px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    button:disabled { opacity: 0.45; cursor: not-allowed; }
+    button:not(:disabled):active { transform: scale(0.98); }
+    .btn-train { background: linear-gradient(135deg, #0ea5e9, #2563eb); color: #fff; }
+    .btn-predict { background: linear-gradient(135deg, #059669, #10b981); color: #fff; }
+    .btn-reset { background: #334155; color: var(--text); }
+    .result-box {
+      margin-top: 14px;
+      padding: 14px;
+      background: #0f172a;
+      border-radius: 10px;
+      border-left: 3px solid var(--ok);
+      font-size: 0.82rem;
+    }
+    .result-box h3 { font-size: 0.85rem; margin-bottom: 8px; color: var(--primary); }
+    .result-row { display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #1e293b; }
+    .result-row:last-child { border: none; }
+    .abnormal { color: #f87171; font-weight: 600; }
+    select, input {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: #0f172a;
+      color: var(--text);
+      font-size: 0.85rem;
+      margin-bottom: 10px;
+    }
+    label { font-size: 0.78rem; color: var(--muted); display: block; margin-bottom: 4px; }
+  </style>
+</head>
+<body>
+  <div class="banner">
+    ⚠ DEMO HỌC TẬP — Mô phỏng huấn luyện AI trên trình duyệt. Không ghi CSDL, không ảnh hưởng hệ thống TechCare thật.
+  </div>
+
+  <div class="wrap">
+    <header>
+      <h1>Huấn luyện mô hình AI sinh kết quả xét nghiệm</h1>
+      <p>
+        Mô phỏng pipeline: <strong>20 mẫu bệnh nhân</strong> → huấn luyện
+        <strong>Random Forest Regressor</strong> (scikit-learn style) → dự đoán chỉ số XN máu tổng quát.
+        <a href="/">← Về trang chủ TechCare</a>
+      </p>
+    </header>
+
+    <div class="grid">
+      <section class="card">
+        <h2>Tập huấn luyện <span class="badge">n = 20</span></h2>
+        <p class="meta">Dữ liệu giả lập từ hồ sơ bệnh nhân ngoại trú (tuổi, giới tính, BMI, triệu chứng).</p>
+        <div style="max-height:220px;overflow:auto">
+          <table id="dataTable">
+            <thead><tr><th>ID</th><th>Tuổi</th><th>GT</th><th>BMI</th><th>Glucose</th><th>Cholesterol</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Huấn luyện mô hình</h2>
+        <p class="meta">Mô hình: Random Forest · 50 cây · max_depth=6 · target: vector chỉ số XN</p>
+        <div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div>
+        <div class="metrics">
+          <div class="metric"><strong id="metricEpoch">0/10</strong><span>Epoch</span></div>
+          <div class="metric"><strong id="metricLoss">—</strong><span>Loss (MSE)</span></div>
+          <div class="metric"><strong id="metricAcc">—</strong><span>R² score</span></div>
+        </div>
+        <div class="btn-row">
+          <button type="button" class="btn-train" id="btnTrain">Bắt đầu huấn luyện</button>
+          <button type="button" class="btn-reset" id="btnReset">Reset</button>
+        </div>
+        <div class="log" id="trainLog" aria-live="polite"></div>
+      </section>
+    </div>
+
+    <section class="card" style="margin-top:20px">
+      <h2>Dự đoán kết quả XN (sau huấn luyện)</h2>
+      <p class="meta">Chọn bệnh nhân mới hoặc nhập thông số — mô hình demo sinh kết quả XN máu tổng quát.</p>
+      <div class="grid">
+        <div>
+          <label for="patientSelect">Bệnh nhân mẫu #21 (validation)</label>
+          <select id="patientSelect"></select>
+          <label for="ageIn">Tuổi</label>
+          <input type="number" id="ageIn" min="18" max="90" value="45" />
+          <label for="bmiIn">BMI</label>
+          <input type="number" id="bmiIn" min="15" max="40" step="0.1" value="24.5" />
+        </div>
+        <div>
+          <div class="btn-row">
+            <button type="button" class="btn-predict" id="btnPredict" disabled>Sinh kết quả XN</button>
+          </div>
+          <div class="result-box" id="resultBox" hidden>
+            <h3>Phiếu kết quả XN máu tổng quát (AI Demo)</h3>
+            <div id="resultRows"></div>
+            <p style="margin-top:10px;font-size:0.75rem;color:var(--muted)">
+              * Kết quả mang tính minh họa học thuật. Bác sĩ xác nhận trên hệ thống chính trước khi trả BN.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+(function () {
+  'use strict';
+
+  /** 20 mẫu huấn luyện giả lập */
+  const TRAINING_SET = [
+    { id: 'BN-001', age: 34, gender: 'Nam', bmi: 22.1, glucose: 4.8, cholesterol: 4.9, got: 28, gpt: 32 },
+    { id: 'BN-002', age: 52, gender: 'Nữ', bmi: 26.4, glucose: 5.8, cholesterol: 6.1, got: 38, gpt: 45 },
+    { id: 'BN-003', age: 41, gender: 'Nam', bmi: 27.8, glucose: 5.2, cholesterol: 5.5, got: 42, gpt: 55 },
+    { id: 'BN-004', age: 29, gender: 'Nữ', bmi: 20.5, glucose: 4.5, cholesterol: 4.2, got: 22, gpt: 24 },
+    { id: 'BN-005', age: 63, gender: 'Nam', bmi: 28.9, glucose: 6.4, cholesterol: 6.8, got: 45, gpt: 52 },
+    { id: 'BN-006', age: 38, gender: 'Nữ', bmi: 23.0, glucose: 4.9, cholesterol: 4.7, got: 25, gpt: 28 },
+    { id: 'BN-007', age: 47, gender: 'Nam', bmi: 25.6, glucose: 5.5, cholesterol: 5.9, got: 35, gpt: 48 },
+    { id: 'BN-008', age: 55, gender: 'Nữ', bmi: 29.2, glucose: 6.0, cholesterol: 6.4, got: 40, gpt: 58 },
+    { id: 'BN-009', age: 31, gender: 'Nam', bmi: 21.8, glucose: 4.6, cholesterol: 4.4, got: 24, gpt: 26 },
+    { id: 'BN-010', age: 44, gender: 'Nữ', bmi: 24.3, glucose: 5.0, cholesterol: 5.1, got: 30, gpt: 35 },
+    { id: 'BN-011', age: 58, gender: 'Nam', bmi: 27.1, glucose: 5.9, cholesterol: 6.2, got: 39, gpt: 50 },
+    { id: 'BN-012', age: 36, gender: 'Nữ', bmi: 22.7, glucose: 4.7, cholesterol: 4.6, got: 26, gpt: 30 },
+    { id: 'BN-013', age: 49, gender: 'Nam', bmi: 26.0, glucose: 5.4, cholesterol: 5.7, got: 36, gpt: 44 },
+    { id: 'BN-014', age: 67, gender: 'Nữ', bmi: 30.1, glucose: 6.6, cholesterol: 7.0, got: 48, gpt: 62 },
+    { id: 'BN-015', age: 33, gender: 'Nam', bmi: 23.5, glucose: 4.9, cholesterol: 4.8, got: 27, gpt: 31 },
+    { id: 'BN-016', age: 42, gender: 'Nữ', bmi: 25.0, glucose: 5.1, cholesterol: 5.3, got: 32, gpt: 38 },
+    { id: 'BN-017', age: 51, gender: 'Nam', bmi: 28.3, glucose: 5.7, cholesterol: 6.0, got: 41, gpt: 54 },
+    { id: 'BN-018', age: 27, gender: 'Nữ', bmi: 19.8, glucose: 4.4, cholesterol: 4.0, got: 20, gpt: 22 },
+    { id: 'BN-019', age: 46, gender: 'Nam', bmi: 26.8, glucose: 5.3, cholesterol: 5.6, got: 37, gpt: 46 },
+    { id: 'BN-020', age: 60, gender: 'Nữ', bmi: 29.5, glucose: 6.2, cholesterol: 6.5, got: 43, gpt: 56 }
+  ];
+
+  const VALIDATION = [
+    { id: 'BN-021', age: 45, gender: 'Nam', bmi: 24.5 },
+    { id: 'BN-022', age: 39, gender: 'Nữ', bmi: 23.2 },
+    { id: 'BN-023', age: 56, gender: 'Nam', bmi: 27.5 }
+  ];
+
+  let trained = false;
+  let modelWeights = null;
+
+  const tbody = document.querySelector('#dataTable tbody');
+  const progressBar = document.getElementById('progressBar');
+  const trainLog = document.getElementById('trainLog');
+  const btnTrain = document.getElementById('btnTrain');
+  const btnReset = document.getElementById('btnReset');
+  const btnPredict = document.getElementById('btnPredict');
+  const patientSelect = document.getElementById('patientSelect');
+  const ageIn = document.getElementById('ageIn');
+  const bmiIn = document.getElementById('bmiIn');
+  const resultBox = document.getElementById('resultBox');
+  const resultRows = document.getElementById('resultRows');
+
+  function log(msg) {
+    const line = document.createElement('div');
+    line.className = 'line';
+    line.textContent = `[${new Date().toLocaleTimeString('vi-VN')}] ${msg}`;
+    trainLog.appendChild(line);
+    trainLog.scrollTop = trainLog.scrollHeight;
+  }
+
+  function renderTable() {
+    tbody.innerHTML = TRAINING_SET.map((r) =>
+      `<tr><td>${r.id}</td><td>${r.age}</td><td>${r.gender}</td><td>${r.bmi}</td><td>${r.glucose}</td><td>${r.cholesterol}</td></tr>`
+    ).join('');
+  }
+
+  function renderSelect() {
+    patientSelect.innerHTML = VALIDATION.map((v) =>
+      `<option value="${v.id}">${v.id} — ${v.age} tuổi, ${v.gender}, BMI ${v.bmi}</option>`
+    ).join('');
+    patientSelect.addEventListener('change', () => {
+      const v = VALIDATION.find((x) => x.id === patientSelect.value);
+      if (v) { ageIn.value = v.age; bmiIn.value = v.bmi; }
+    });
+  }
+
+  /** Giả lập học trọng số từ tập 20 mẫu (trung bình có hệ số tuổi/BMI) */
+  function fitFakeModel() {
+    const n = TRAINING_SET.length;
+    const avg = (key) => TRAINING_SET.reduce((s, r) => s + r[key], 0) / n;
+    modelWeights = {
+      glucose: { base: avg('glucose'), age: 0.012, bmi: 0.018 },
+      cholesterol: { base: avg('cholesterol'), age: 0.008, bmi: 0.022 },
+      got: { base: avg('got'), age: 0.15, bmi: 0.35 },
+      gpt: { base: avg('gpt'), age: 0.18, bmi: 0.42 },
+      ure: { base: 4.8, age: 0.01, bmi: 0.005 },
+      creatinin: { base: 82, age: 0.8, bmi: 0.3 }
+    };
+  }
+
+  function predict(age, bmi) {
+    if (!modelWeights) return null;
+    const noise = () => (Math.random() - 0.5) * 0.15;
+    const p = {};
+    for (const [k, w] of Object.entries(modelWeights)) {
+      p[k] = w.base + w.age * (age - 45) + w.bmi * (bmi - 24) + noise();
+    }
+    return p;
+  }
+
+  function fmt(v, d = 2) { return Number(v).toFixed(d); }
+
+  async function runTraining() {
+    btnTrain.disabled = true;
+    btnPredict.disabled = true;
+    trained = false;
+    trainLog.innerHTML = '';
+    progressBar.style.width = '0%';
+
+    log('Load dataset: 20 samples × 6 features');
+    log('Split: 80% train / 20% validation (demo)');
+    await sleep(400);
+    log('Init RandomForestRegressor(n_estimators=50, max_depth=6)');
+
+    const epochs = 10;
+    for (let e = 1; e <= epochs; e++) {
+      await sleep(350);
+      const loss = (0.42 - e * 0.035 + Math.random() * 0.02).toFixed(4);
+      const r2 = (0.72 + e * 0.025 + Math.random() * 0.01).toFixed(3);
+      progressBar.style.width = `${(e / epochs) * 100}%`;
+      document.getElementById('metricEpoch').textContent = `${e}/${epochs}`;
+      document.getElementById('metricLoss').textContent = loss;
+      document.getElementById('metricAcc').textContent = r2;
+      log(`Epoch ${e}/${epochs} — loss=${loss} — R²=${r2}`);
+    }
+
+    fitFakeModel();
+    trained = true;
+    log('✓ Huấn luyện hoàn tất. Model sẵn sàng dự đoán.');
+    log('Lưu ý: Demo in-browser, không export .pkl');
+    btnTrain.disabled = false;
+    btnPredict.disabled = false;
+  }
+
+  function sleep(ms) { return new Promise((r) => setTimeout(r, ms)); }
+
+  function showResults(p) {
+    const rows = [
+      ['Glucose', fmt(p.glucose), '3.9 – 5.6 mmol/L', p.glucose > 5.6],
+      ['Cholesterol', fmt(p.cholesterol), '< 5.2 mmol/L', p.cholesterol > 5.2],
+      ['GOT (AST)', fmt(p.got, 1), '0 – 40 U/L', p.got > 40],
+      ['GPT (ALT)', fmt(p.gpt, 1), '0 – 40 U/L', p.gpt > 40],
+      ['Ure', fmt(p.ure), '2.8 – 7.2 mmol/L', false],
+      ['Creatinin', fmt(p.creatinin, 0), '59 – 104 µmol/L', p.creatinin > 104]
+    ];
+    resultRows.innerHTML = rows.map(([name, val, ref, ab]) =>
+      `<div class="result-row"><span>${name}</span><span class="${ab ? 'abnormal' : ''}">${val} <small style="color:var(--muted)">(${ref})</small></span></div>`
+    ).join('');
+    resultBox.hidden = false;
+  }
+
+  btnTrain.addEventListener('click', runTraining);
+  btnReset.addEventListener('click', () => {
+    trained = false;
+    modelWeights = null;
+    progressBar.style.width = '0%';
+    trainLog.innerHTML = '';
+    document.getElementById('metricEpoch').textContent = '0/10';
+    document.getElementById('metricLoss').textContent = '—';
+    document.getElementById('metricAcc').textContent = '—';
+    btnPredict.disabled = true;
+    resultBox.hidden = true;
+    log('Đã reset mô hình demo.');
+  });
+  btnPredict.addEventListener('click', () => {
+    if (!trained) return;
+    const age = Number(ageIn.value) || 45;
+    const bmi = Number(bmiIn.value) || 24.5;
+    log(`Predict: age=${age}, bmi=${bmi}`);
+    const p = predict(age, bmi);
+    if (p) showResults(p);
+  });
+
+  renderTable();
+  renderSelect();
+  log('Sẵn sàng. Nhấn "Bắt đầu huấn luyện" để mô phỏng pipeline AI.');
+})();
+  </script>
+</body>
+</html>

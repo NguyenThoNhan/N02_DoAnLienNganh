@@ -1,0 +1,23 @@
+@import url('/css/patient/layout.css');
+
+.sidebar-doctor .sidebar-brand-icon {
+  background: linear-gradient(135deg, #0d9488 0%, #2563eb 100%);
+  box-shadow: 0 4px 14px rgba(13, 148, 136, 0.35);
+}
+
+.brand-text small {
+  display: block;
+  font-size: 0.62rem;
+  font-weight: 500;
+  opacity: 0.75;
+  letter-spacing: 0.04em;
+}
+
+#sidebarUserMeta {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

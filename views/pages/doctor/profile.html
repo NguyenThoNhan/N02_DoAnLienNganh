@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hồ sơ bác sĩ — TechCare</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/doctor/layout.css" />
+  <link rel="stylesheet" href="/css/doctor/component.css" />
+  <link rel="stylesheet" href="/css/doctor/pages.css" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+</head>
+<body class="app-body" data-page="profile">
+  <div id="navMount"></div>
+  <div class="main-wrap">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button type="button" class="menu-btn" id="sidebarToggle"><i data-lucide="menu"></i></button>
+        <h1 id="pageTitle">Hồ sơ bác sĩ</h1>
+      </div>
+    </header>
+    <main class="page-content">
+      <div class="profile-grid">
+        <div class="card avatar-upload">
+          <div class="card-body">
+            <div class="avatar-preview" id="avatarPreview">BS</div>
+            <label class="btn btn-outline btn-sm" style="cursor:pointer">
+              <i data-lucide="camera"></i> Đổi ảnh
+              <input type="file" id="avatarInput" accept="image/jpeg,image/png,image/webp" hidden />
+            </label>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <div><h2>Thông tin chuyên môn</h2><p id="deptReadonly">—</p></div>
+          </div>
+          <form id="profileForm" class="card-body">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Họ và tên</label>
+                <input type="text" id="full_name" class="form-input" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Số điện thoại</label>
+                <input type="tel" id="phone" class="form-input" disabled />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Cấp bậc</label>
+                <input type="text" id="title_label" class="form-input" disabled />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Phí khám (đ)</label>
+                <input type="number" id="consultation_fee" class="form-input" min="0" step="1000" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Chuyên môn</label>
+              <input type="text" id="specialization" class="form-input" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Kinh nghiệm (năm)</label>
+              <input type="number" id="experience_years" class="form-input" min="0" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Giới thiệu / kinh nghiệm làm việc</label>
+              <textarea id="bio" class="form-textarea" rows="4"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" id="saveBtn"><i data-lucide="save"></i> Lưu hồ sơ</button>
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script src="/js/doctor/common.js"></script>
+  <script src="/js/doctor/navigation.js"></script>
+  <script src="/js/doctor/profile.js"></script>
+</body>
+</html>

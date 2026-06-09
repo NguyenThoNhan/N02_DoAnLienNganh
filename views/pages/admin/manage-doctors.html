@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bác sĩ — Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/admin/layout.css" />
+  <link rel="stylesheet" href="/css/admin/component.css" />
+  <link rel="stylesheet" href="/css/admin/pages.css" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+</head>
+<body class="app-body" data-page="doctors">
+  <div id="navMount"></div>
+  <div class="main-wrap">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button type="button" class="menu-btn" id="sidebarToggle"><i data-lucide="menu"></i></button>
+        <h1 id="pageTitle">Quản lý bác sĩ</h1>
+      </div>
+      <div class="topbar-actions"><p class="topbar-greeting"><strong id="topUserName">—</strong></p></div>
+    </header>
+    <main class="page-content">
+      <div class="toolbar">
+        <div class="toolbar-left">
+          <input type="search" id="searchInput" class="form-input" placeholder="Tìm bác sĩ..." style="max-width:220px" />
+          <select id="filterDept" class="form-input" style="width:auto"><option value="">Tất cả khoa</option></select>
+          <select id="filterStatus" class="form-input" style="width:auto">
+            <option value="all">Tất cả trạng thái</option>
+            <option value="active">Hoạt động</option>
+            <option value="inactive">Ngưng</option>
+          </select>
+        </div>
+        <button type="button" class="btn btn-primary" id="btnAdd"><i data-lucide="user-plus"></i> Thêm bác sĩ</button>
+      </div>
+      <div class="card">
+        <div class="card-body" style="padding-top:0">
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr><th>Bác sĩ</th><th>Khoa</th><th>Cấp bậc</th><th>Phí khám</th><th>Trạng thái</th><th></th></tr>
+              </thead>
+              <tbody id="tableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div class="modal-overlay" id="docModal">
+    <div class="modal modal-lg">
+      <div class="modal-header">
+        <h3 id="modalTitle">Thêm bác sĩ</h3>
+        <button type="button" class="modal-close" data-close-modal><i data-lucide="x"></i></button>
+      </div>
+      <form id="docForm" class="modal-body">
+        <input type="hidden" id="docId" />
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label">Họ tên *</label>
+            <input type="text" id="fullName" class="form-input" required />
+          </div>
+          <div class="form-group" id="phoneGroup">
+            <label class="form-label">SĐT *</label>
+            <input type="tel" id="phone" class="form-input" pattern="0[35789][0-9]{8}" />
+          </div>
+          <div class="form-group" id="passGroup">
+            <label class="form-label">Mật khẩu *</label>
+            <input type="password" id="password" class="form-input" minlength="6" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Khoa *</label>
+            <select id="departmentId" class="form-input" required></select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Cấp bậc *</label>
+            <select id="title" class="form-input" required></select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phí khám (đ)</label>
+            <input type="number" id="consultationFee" class="form-input" min="0" step="1000" value="200000" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Chuyên môn</label>
+            <input type="text" id="specialization" class="form-input" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Kinh nghiệm (năm)</label>
+            <input type="number" id="experienceYears" class="form-input" min="0" value="0" />
+          </div>
+          <div class="form-group" id="statusGroup" hidden>
+            <label class="form-label">Trạng thái hồ sơ</label>
+            <select id="docStatus" class="form-input">
+              <option value="active">Hoạt động</option>
+              <option value="inactive">Ngưng</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Ảnh đại diện</label>
+            <input type="file" id="avatar" class="form-input" accept="image/*" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Giới thiệu</label>
+          <textarea id="bio" class="form-input form-textarea"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" data-close-modal>Hủy</button>
+          <button type="submit" class="btn btn-primary" id="docSubmit">Lưu</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/admin/common.js"></script>
+  <script src="/js/admin/navigation.js"></script>
+  <script src="/js/admin/manage-doctors.js"></script>
+</body>
+</html>

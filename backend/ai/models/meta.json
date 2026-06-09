@@ -1,0 +1,37 @@
+{
+  "model": "RandomForestClassifier",
+  "dataset": "heart.csv",
+  "samples": 1025,
+  "accuracy": 0.9902,
+  "features": [
+    "age",
+    "sex",
+    "cp",
+    "trestbps",
+    "chol",
+    "fbs",
+    "restecg",
+    "thalach",
+    "exang",
+    "oldpeak",
+    "slope",
+    "ca",
+    "thal"
+  ],
+  "target_meaning": "0=bình thường, 1=nguy cơ bệnh tim mạch",
+  "feature_means": {
+    "age": 54.434,
+    "sex": 0.696,
+    "cp": 0.942,
+    "trestbps": 131.612,
+    "chol": 246.0,
+    "fbs": 0.149,
+    "restecg": 0.53,
+    "thalach": 149.114,
+    "exang": 0.337,
+    "oldpeak": 1.072,
+    "slope": 1.385,
+    "ca": 0.754,
+    "thal": 2.324
+  }
+}

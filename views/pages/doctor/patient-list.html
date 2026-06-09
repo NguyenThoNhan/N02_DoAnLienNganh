@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Danh sách bệnh nhân — TechCare</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/doctor/layout.css" />
+  <link rel="stylesheet" href="/css/doctor/component.css" />
+  <link rel="stylesheet" href="/css/doctor/pages.css" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+</head>
+<body class="app-body" data-page="patients">
+  <div id="navMount"></div>
+  <div class="main-wrap">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button type="button" class="menu-btn" id="sidebarToggle"><i data-lucide="menu"></i></button>
+        <h1 id="pageTitle">Danh sách bệnh nhân</h1>
+      </div>
+    </header>
+    <main class="page-content">
+      <div class="filter-bar">
+        <div class="topbar-search" style="flex:1;max-width:400px">
+          <i data-lucide="search"></i>
+          <input type="search" id="searchInput" placeholder="Tìm theo tên, SĐT bệnh nhân trong lịch..." />
+        </div>
+        <input type="date" id="filterDate" class="form-input" style="width:auto" />
+        <select id="filterStatus" class="form-select" style="width:auto">
+          <option value="">Mọi trạng thái</option>
+          <option value="pending">Chờ</option>
+          <option value="confirmed">Xác nhận</option>
+          <option value="in_progress">Đang khám</option>
+          <option value="completed">Hoàn thành</option>
+        </select>
+      </div>
+
+      <div class="card">
+        <div class="card-body" style="padding-top:0">
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Bệnh nhân</th>
+                  <th>Ngày giờ</th>
+                  <th>Lý do</th>
+                  <th>Trạng thái</th>
+                  <th>Hồ sơ</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="patientTable"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script src="/js/doctor/common.js"></script>
+  <script src="/js/doctor/navigation.js"></script>
+  <script src="/js/doctor/patient-list.js"></script>
+</body>
+</html>

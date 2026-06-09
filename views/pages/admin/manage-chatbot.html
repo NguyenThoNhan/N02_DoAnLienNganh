@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chatbot — Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/admin/layout.css" />
+  <link rel="stylesheet" href="/css/admin/component.css" />
+  <link rel="stylesheet" href="/css/admin/pages.css" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+</head>
+<body class="app-body" data-page="chatbot">
+  <div id="navMount"></div>
+  <div class="main-wrap">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button type="button" class="menu-btn" id="sidebarToggle"><i data-lucide="menu"></i></button>
+        <h1 id="pageTitle">Quản lý Chatbot</h1>
+      </div>
+      <div class="topbar-actions"><p class="topbar-greeting"><strong id="topUserName">—</strong></p></div>
+    </header>
+    <main class="page-content">
+      <div class="toolbar">
+        <p class="text-muted">Kịch bản trả lời tự động cho bệnh nhân</p>
+        <button type="button" class="btn btn-primary" id="btnAdd"><i data-lucide="message-square-plus"></i> Thêm kịch bản</button>
+      </div>
+      <div class="card">
+        <div class="card-body" style="padding-top:0">
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr><th>Intent</th><th>Từ khóa</th><th>Phản hồi</th><th>Ưu tiên</th><th>Trạng thái</th><th></th></tr>
+              </thead>
+              <tbody id="tableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div class="modal-overlay" id="botModal">
+    <div class="modal modal-lg">
+      <div class="modal-header">
+        <h3 id="modalTitle">Kịch bản mới</h3>
+        <button type="button" class="modal-close" data-close-modal><i data-lucide="x"></i></button>
+      </div>
+      <form id="botForm" class="modal-body">
+        <input type="hidden" id="botId" />
+        <div class="form-group">
+          <label class="form-label">Tên intent *</label>
+          <input type="text" id="intentName" class="form-input" required placeholder="booking_help" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Từ khóa (JSON mảng) *</label>
+          <input type="text" id="keywords" class="form-input keywords-input" placeholder='["đặt lịch", "booking"]' required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Nội dung phản hồi *</label>
+          <textarea id="response" class="form-input form-textarea" required></textarea>
+        </div>
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label">Loại hành động</label>
+            <select id="actionType" class="form-input">
+              <option value="text">Chỉ text</option>
+              <option value="redirect">Chuyển trang</option>
+              <option value="faq">FAQ</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">URL (nếu redirect)</label>
+            <input type="text" id="actionUrl" class="form-input" placeholder="/pages/patient/booking.html" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Ưu tiên</label>
+            <input type="number" id="priority" class="form-input" value="0" />
+          </div>
+          <div class="form-group">
+            <label class="form-label"><input type="checkbox" id="isActive" checked /> Đang bật</label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" data-close-modal>Hủy</button>
+          <button type="submit" class="btn btn-primary" id="botSubmit">Lưu</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/admin/common.js"></script>
+  <script src="/js/admin/navigation.js"></script>
+  <script src="/js/admin/manage-chatbot.js"></script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tin tức — Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/admin/layout.css" />
+  <link rel="stylesheet" href="/css/admin/component.css" />
+  <link rel="stylesheet" href="/css/admin/pages.css" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+</head>
+<body class="app-body" data-page="news">
+  <div id="navMount"></div>
+  <div class="main-wrap">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button type="button" class="menu-btn" id="sidebarToggle"><i data-lucide="menu"></i></button>
+        <h1 id="pageTitle">Quản lý tin tức</h1>
+      </div>
+      <div class="topbar-actions"><p class="topbar-greeting"><strong id="topUserName">—</strong></p></div>
+    </header>
+    <main class="page-content">
+      <div class="toolbar">
+        <input type="search" id="searchInput" class="form-input" placeholder="Tìm bài viết..." style="max-width:240px" />
+        <button type="button" class="btn btn-primary" id="btnAdd"><i data-lucide="file-plus"></i> Viết bài</button>
+      </div>
+      <div class="card">
+        <div class="card-body" style="padding-top:0">
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr><th></th><th>Tiêu đề</th><th>Danh mục</th><th>Trạng thái</th><th>Lượt xem</th><th></th></tr>
+              </thead>
+              <tbody id="tableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div class="modal-overlay" id="newsModal">
+    <div class="modal modal-lg">
+      <div class="modal-header">
+        <h3 id="modalTitle">Bài viết mới</h3>
+        <button type="button" class="modal-close" data-close-modal><i data-lucide="x"></i></button>
+      </div>
+      <form id="newsForm" class="modal-body">
+        <input type="hidden" id="newsId" />
+        <div class="form-group">
+          <label class="form-label">Tiêu đề *</label>
+          <input type="text" id="newsTitle" class="form-input" required />
+        </div>
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label">Danh mục</label>
+            <select id="newsCategory" class="form-input"></select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Trạng thái</label>
+            <select id="newsStatus" class="form-input">
+              <option value="draft">Nháp</option>
+              <option value="published">Xuất bản</option>
+              <option value="archived">Lưu trữ</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Tóm tắt</label>
+          <textarea id="newsSummary" class="form-input form-textarea" rows="2"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Nội dung *</label>
+          <textarea id="newsContent" class="form-input form-textarea" rows="6" required></textarea>
+        </div>
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label">Ảnh thumbnail</label>
+            <input type="file" id="newsThumb" class="form-input" accept="image/*" />
+          </div>
+          <div class="form-group">
+            <label class="form-label"><input type="checkbox" id="newsFeatured" /> Nổi bật trang chủ</label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" data-close-modal>Hủy</button>
+          <button type="submit" class="btn btn-primary" id="newsSubmit">Lưu</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/admin/common.js"></script>
+  <script src="/js/admin/navigation.js"></script>
+  <script src="/js/admin/manage-news.js"></script>
+</body>
+</html>

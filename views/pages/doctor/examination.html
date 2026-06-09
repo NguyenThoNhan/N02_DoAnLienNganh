@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Phòng khám — TechCare</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/doctor/layout.css" />
+  <link rel="stylesheet" href="/css/doctor/component.css" />
+  <link rel="stylesheet" href="/css/doctor/pages.css" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+</head>
+<body class="app-body" data-page="examination">
+  <div id="navMount"></div>
+  <div class="main-wrap">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button type="button" class="menu-btn" id="sidebarToggle"><i data-lucide="menu"></i></button>
+        <h1 id="pageTitle">Phòng khám</h1>
+      </div>
+      <a href="/pages/doctor/dashboard.html" class="btn btn-ghost btn-sm"><i data-lucide="arrow-left"></i> Dashboard</a>
+    </header>
+    <main class="page-content">
+      <section class="exam-pro-header">
+        <div>
+          <h2>Trung tâm điều phối phòng khám</h2>
+          <p>Theo dõi ca khám, chỉ định cận lâm sàng và hoàn tất hồ sơ trong một màn hình.</p>
+        </div>
+        <div class="exam-pro-actions">
+          <a href="/pages/doctor/patient-list.html" class="btn btn-outline btn-sm"><i data-lucide="users"></i> DS bệnh nhân</a>
+          <a href="/pages/patient/hospital-map.html" target="_blank" rel="noopener" class="btn btn-outline btn-sm"><i data-lucide="map"></i> Sơ đồ bệnh viện</a>
+        </div>
+      </section>
+      <div class="exam-kpi-strip" id="examKpiStrip">
+        <div class="exam-kpi-chip"><span>Tiến trình</span><strong id="kpiProgress">—</strong></div>
+        <div class="exam-kpi-chip"><span>Trạng thái ca</span><strong id="kpiCaseStatus">—</strong></div>
+        <div class="exam-kpi-chip"><span>Tổng chi phí tạm tính</span><strong id="kpiAmount">—</strong></div>
+      </div>
+      <div id="examRoot">
+        <div class="skeleton" style="height:120px;margin-bottom:20px"></div>
+      </div>
+    </main>
+  </div>
+  <div id="guideSlipModal" class="guide-slip-modal" hidden aria-hidden="true">
+    <div class="guide-slip-backdrop"></div>
+    <div class="guide-slip-dialog">
+      <div class="guide-slip-actions no-print">
+        <button type="button" class="btn btn-outline btn-sm" id="btnPrintSlip"><i data-lucide="printer"></i> In phiếu</button>
+        <button type="button" class="btn btn-primary btn-sm" id="btnSlipContinue"><i data-lucide="arrow-right"></i> Tiếp — Kết quả XN</button>
+        <button type="button" class="btn btn-ghost btn-sm" id="btnCloseSlip"><i data-lucide="x"></i></button>
+      </div>
+      <div id="guideSlipPrint" class="guide-slip-print"></div>
+    </div>
+  </div>
+
+  <div id="labReportModal" class="modal-overlay lab-report-overlay" aria-hidden="true">
+    <div class="modal lab-report-modal-dialog">
+      <div class="modal-header no-print">
+        <h3>Phiếu kết quả xét nghiệm</h3>
+        <button type="button" class="modal-close" id="btnCloseLabReport" aria-label="Đóng"><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal-body" id="labReportPrint"></div>
+      <div class="modal-footer no-print">
+        <button type="button" class="btn btn-outline btn-sm" id="btnPrintLabReport"><i data-lucide="printer"></i> In phiếu</button>
+        <button type="button" class="btn btn-primary btn-sm" id="btnCloseLabReportFooter">Đóng</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/doctor/common.js"></script>
+  <script src="/js/doctor/navigation.js"></script>
+  <script src="/js/doctor/examination.js"></script>
+</body>
+</html>
