@@ -45,23 +45,9 @@ Truy cập: http://localhost:5000
 
 # Tính năng nổi bật
 
-Chống trùng lịch 2 tầng (application + UNIQUE constraint DB)
-Quy trình khám 6 bước với gợi ý thuốc thông minh
-AI cảnh báo sinh hiệu (Random Forest, train từ heart.csv)
-Thanh toán QR chuẩn VietQR
-Chống phình database: ảnh lưu tại /uploads/, DB chỉ lưu đường dẫn
-Kiểm thử tải k6: p95 < 300ms với 50 VU đồng thời
-
-# Cấu trúc thư mục chính
-├── backend/
-│   ├── controllers/   # Xử lý nghiệp vụ
-│   ├── models/        # Truy vấn SQL
-│   ├── routes/        # Định tuyến API
-│   ├── middlewares/   # JWT, phân quyền, upload
-│   ├── migrations/    # Bảng
-│   ├── ai/            # Python Random Forest (heart.csv
-│   └── server.js      # Điểm khởi động
-├── views/             # Frontend HTML/CSS/JS
-├── uploads/           # Ảnh xét nghiệm, tin tức, avatar
-├── test/              # Kiểm thử 
-└── .env.example
+- Chống trùng lịch 2 tầng (application + UNIQUE constraint DB)
+- Quy trình khám 6 bước với gợi ý thuốc thông minh
+- AI cảnh báo sinh hiệu (Random Forest, train từ heart.csv)
+- Thanh toán QR chuẩn VietQR
+- Chống phình database: ảnh lưu tại /uploads/, DB chỉ lưu đường dẫn
+- Kiểm thử tải k6: p95 < 300ms với 50 VU đồng thời
